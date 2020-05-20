@@ -3,7 +3,7 @@ from pyspark import SparkContext
 
 sc = SparkContext.getOrCreate();
 
-lines = sc.textFile(sys.argv[1])
+lines = sc.textFile('text.txt')
 word_counts = lines.flatMap(lambda line: line.split(' ')) \
                    .map(lambda word: (word, 1)) \
                    .reduceByKey(lambda count1, count2: count1 + count2) \
@@ -11,4 +11,3 @@ word_counts = lines.flatMap(lambda line: line.split(' ')) \
 
 for (word, count) in word_counts:
     print(word, count)
-    
